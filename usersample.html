@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>User Sample NodeJS Application</title>
+</head>
+<body bgcolor="#EEEEEE">
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<table id="usersample"></table>
+
+<script>
+	
+    // document ready function
+    $(document).ready(function() {
+	
+	// select the employees table from the page and
+	// store it in a variable for later use.
+	var $usersample = $("#usersample");
+		
+	// make an ajax call to the employees WebAPI service
+	// to retrieve a JSON response of all the employees
+	$.ajax({
+	    // the url to the service
+	    url: "http://localhost:8081/listUsers",
+	    // the format that the data should be in when
+	    // it is returned
+	    contentType: "json",
+	    // the function that executes when the server
+	    // responds to this ajax request successfully
+	    success: function(data) {
+				
+	        // iterate over the data items returned from the server
+	        // the index variable is the position in the colleciton.
+	        // the item variable is the item itself
+	        $.each(data, function(index, item){
+				
+		    // append the first and last name to the table
+		    $usersample.append("<tr><td>" + item.id + "</td>" +
+				          "<td>" + item.name + "</td>" + 
+				          "<td>" + item.password + "</td>" + 
+				          "<td>" + item.profession + "</td></tr>");
+					
+	        });
+				
+	      }
+			
+	});
+    });
+	
+</script>
+
+
+
+</body>
+
+
+</html>
